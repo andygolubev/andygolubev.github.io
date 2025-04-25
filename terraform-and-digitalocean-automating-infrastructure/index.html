@@ -335,13 +335,13 @@
             </pre></code>
 
             <p>Here I use the output of the Stage 1 as the input for the Stage 2:</p>
-            <code>
+            <pre>
                 terraform -chdir=$PATH_STAGE_2 apply -var="digital_ocean_api_token=$DO_API_TOKEN" --auto-approve -var="k8s_cluster_name=$(cd $PATH_STAGE_1 && terraform output -raw k8s_cluster_name)"
-            </code>
+            </pre>
             <p>so this command returns just the cluster name:</p>
-            <code><pre>
+            <code>
                 terraform output -raw k8s_cluster_name
-            </pre></code>
+            </code>
             
             <p>Workflow for the infrastructure destruction:</p>
 
