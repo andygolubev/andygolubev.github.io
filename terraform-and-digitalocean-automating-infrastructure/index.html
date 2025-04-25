@@ -286,10 +286,10 @@
 
             <p>For the automation I use two separate workflows:</p>
 
-            <ul>
+            <ol>
                 <li>Provision the infrastructure</li>
                 <li>Destroy the infrastructure (Manual run)</li>
-            </ul>
+            </ol>
 
             <p>Workflow for the infrastructure provision:</p>
 
@@ -335,7 +335,9 @@
             </pre></code>
 
             <p>Here I use the output of the Stage 1 as the input for the Stage 2:</p>
-            <p>terraform -chdir=$PATH_STAGE_2 apply -var="digital_ocean_api_token=$DO_API_TOKEN" --auto-approve -var="k8s_cluster_name=$(cd $PATH_STAGE_1 && terraform output -raw k8s_cluster_name)"</p>
+            <code>
+                terraform -chdir=$PATH_STAGE_2 apply -var="digital_ocean_api_token=$DO_API_TOKEN" --auto-approve -var="k8s_cluster_name=$(cd $PATH_STAGE_1 && terraform output -raw k8s_cluster_name)"
+            </code>
             <p>so this command returns just the cluster name:</p>
             <p>terraform output -raw k8s_cluster_name</p>
             
