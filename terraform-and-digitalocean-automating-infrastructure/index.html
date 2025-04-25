@@ -339,7 +339,9 @@
                 terraform -chdir=$PATH_STAGE_2 apply -var="digital_ocean_api_token=$DO_API_TOKEN" --auto-approve -var="k8s_cluster_name=$(cd $PATH_STAGE_1 && terraform output -raw k8s_cluster_name)"
             </code>
             <p>so this command returns just the cluster name:</p>
-            <p>terraform output -raw k8s_cluster_name</p>
+            <code><pre>
+                terraform output -raw k8s_cluster_name
+            </pre></code>
             
             <p>Workflow for the infrastructure destruction:</p>
 
