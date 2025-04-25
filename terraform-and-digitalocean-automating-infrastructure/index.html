@@ -1,42 +1,45 @@
 <html>
     <head>
         <title>Terraform and DigitalOcean: Automating Infrastructure and Catching the Hidden Load Balancer</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../styles.css">
     </head>
     <body>
         <h1><b>Terraform and DigitalOcean: Automating Infrastructure and Catching the Hidden Load Balancer</b></h1>
-        <h1>Introduction:</h1>
+        <h2>Introduction:</h2>
         <h2>Date: 17 May 2023</h2>
-        In this article, I will demonstrate the process of provisioning various components of infrastructure, including Projects, Virtual Private Clouds (VPCs), Kubernetes clusters, Load Balancers, and DNS Records. Additionally, I will outline the steps to configure Kubernetes with ingress and cert-manager, all within a single pipeline.
-        For this purpose, I have chosen DigitalOcean as the cloud provider due to its cost-effectiveness in comparison to leading providers like AWS, GCP, and Azure. To facilitate the infrastructure provisioning, I will be utilizing Terraform, a powerful infrastructure as code tool. Unfortunately, I won't be able to incorporate Terragrunt into this setup, as I encountered difficulties in configuring it with DigitalOcean Bucket (Space).
+        <p>In this article, I will demonstrate the process of provisioning various components of infrastructure, including Projects, Virtual Private Clouds (VPCs), Kubernetes clusters, Load Balancers, and DNS Records. Additionally, I will outline the steps to configure Kubernetes with ingress and cert-manager, all within a single pipeline.
+        <p>For this purpose, I have chosen DigitalOcean as the cloud provider due to its cost-effectiveness in comparison to leading providers like AWS, GCP, and Azure. To facilitate the infrastructure provisioning, I will be utilizing Terraform, a powerful infrastructure as code tool. Unfortunately, I won't be able to incorporate Terragrunt into this setup, as I encountered difficulties in configuring it with DigitalOcean Bucket (Space).</p>
         
-        Project structure:
-        The core of my project involves defining a live infrastructure along with several modules. The infrastructure definition comprises two distinct stages, which can be visualized through the provided diagram.
-        You can find all of my code in my GitHub repository: https://github.com/andygolubev/terraform-digital-ocean
+        <h2>Project structure:</h2>
+        <p>The core of my project involves defining a live infrastructure along with several modules. The infrastructure definition comprises two distinct stages, which can be visualized through the provided diagram.</p>
+        <p>You can find all of my code in my GitHub repository: https://github.com/andygolubev/terraform-digital-ocean</p>
         
-        Initially, I attempted to handle both stages within a single script. However, during the implementation, I encountered a limitation with Terraform. Specifically, I discovered that Terraform's integration with the DigitalOcean provider did not allow for the creation and configuration of Kubernetes using the HashiCorp Kubernetes provider within the same script.
+        <p>Initially, I attempted to handle both stages within a single script. However, during the implementation, I encountered a limitation with Terraform. Specifically, I discovered that Terraform's integration with the DigitalOcean provider did not allow for the creation and configuration of Kubernetes using the HashiCorp Kubernetes provider within the same script.</p>
         
-        To address this challenge and ensure a smooth deployment process, I decided to split the infrastructure definition into two stages:
+        <p>To address this challenge and ensure a smooth deployment process, I decided to split the infrastructure definition into two stages:</p>
         
-        Stage 1: Infrastructure Provisioning (VPC, Kubernetes, PostgreSQL, Install Nginx and Cert manager)
-        Stage 2: Kubernetes Configuration, DNS records setup
+        <p>Stage 1: Infrastructure Provisioning (VPC, Kubernetes, PostgreSQL, Install Nginx and Cert manager)</p>
+        <p>Stage 2: Kubernetes Configuration, DNS records setup</p>
 
-        By separating the infrastructure provisioning and Kubernetes configuration into distinct stages, we can overcome the limitations imposed by the integration challenges mentioned earlier. This approach allows for granular control and flexibility when deploying and managing infrastructure and Kubernetes resources.
+        <p>By separating the infrastructure provisioning and Kubernetes configuration into distinct stages, we can overcome the limitations imposed by the integration challenges mentioned earlier. This approach allows for granular control and flexibility when deploying and managing infrastructure and Kubernetes resources.</p>
 
-        Furthermore, this division of stages enables better modularization and reusability, as each stage can be version-controlled, tested, and deployed independently. This not only simplifies the maintenance and troubleshooting process but also promotes scalability and agility when making changes or expanding the infrastructure in the future.
+        <p>Furthermore, this division of stages enables better modularization and reusability, as each stage can be version-controlled, tested, and deployed independently. This not only simplifies the maintenance and troubleshooting process but also promotes scalability and agility when making changes or expanding the infrastructure in the future.</p>
         
-        Overall, by navigating around the constraints and adopting a two-stage approach, we can effectively define and deploy our live infrastructure while integrating Kubernetes seamlessly into the process, ensuring a reliable and scalable environment for our applications.
+        <p>Overall, by navigating around the constraints and adopting a two-stage approach, we can effectively define and deploy our live infrastructure while integrating Kubernetes seamlessly into the process, ensuring a reliable and scalable environment for our applications.</p>
         
-        This is my folders structure:
+        <p>This is my folders structure:</p>
 
         <img src="pic01.png" alt="pic01">
 
-        By separating the infrastructure provisioning and Kubernetes configuration into distinct stages, we can overcome the limitations imposed by the integration challenges mentioned earlier. This approach allows for granular control and flexibility when deploying and managing infrastructure and Kubernetes resources.
+        <p>By separating the infrastructure provisioning and Kubernetes configuration into distinct stages, we can overcome the limitations imposed by the integration challenges mentioned earlier. This approach allows for granular control and flexibility when deploying and managing infrastructure and Kubernetes resources.</p>
 
-        Furthermore, this division of stages enables better modularization and reusability, as each stage can be version-controlled, tested, and deployed independently. This not only simplifies the maintenance and troubleshooting process but also promotes scalability and agility when making changes or expanding the infrastructure in the future.
+        <p>Furthermore, this division of stages enables better modularization and reusability, as each stage can be version-controlled, tested, and deployed independently. This not only simplifies the maintenance and troubleshooting process but also promotes scalability and agility when making changes or expanding the infrastructure in the future.</p>
 
-        Overall, by navigating around the constraints and adopting a two-stage approach, we can effectively define and deploy our live infrastructure while integrating Kubernetes seamlessly into the process, ensuring a reliable and scalable environment for our applications.
+        <p>Overall, by navigating around the constraints and adopting a two-stage approach, we can effectively define and deploy our live infrastructure while integrating Kubernetes seamlessly into the process, ensuring a reliable and scalable environment for our applications.</p>
 
-        This is my folders structure:
+        <p>This is my folders structure:</p>
 
         <pre><code>
         ➜  terraform-digital-ocean git:(main) tree .
@@ -91,15 +94,15 @@
         └── README.md
         </code></pre>
 
-        <h1>Terraform backend setup:</h1>
+        <h2>Terraform backend setup:</h2>
 
-        Prior to executing my pipeline, I have created a private bucket in DigitalOcean for storing terraform states.
+        <p>Prior to executing my pipeline, I have created a private bucket in DigitalOcean for storing terraform states.</p>
 
         <img src="pic02.png" alt="pic02">
 
-        <h1>Stage 1. Provision the infrastructure</h1>
+        <h2>Stage 1. Provision the infrastructure</h2>
 
-        During this stage, I utilize my "main-stage1.tf" file to declare the necessary values for infrastructure provisioning. Additionally, I ensure proper management of dependencies between modules to guarantee a smooth and coherent deployment process.
+        <p>During this stage, I utilize my "main-stage1.tf" file to declare the necessary values for infrastructure provisioning. Additionally, I ensure proper management of dependencies between modules to guarantee a smooth and coherent deployment process.</p>
 
         <code><pre>
             ...
@@ -145,9 +148,9 @@
             }
         </pre></code>
         
-        The complete content of the file: <a href="https://github.com/andygolubev/terraform-digital-ocean/blob/main/infrastructure/digitalocean/infrastructure-live/test-v1/stage1/main-stage1.tf">main-stage1.tf</a>
+        <p>The complete content of the file: <a href="https://github.com/andygolubev/terraform-digital-ocean/blob/main/infrastructure/digitalocean/infrastructure-live/test-v1/stage1/main-stage1.tf">main-stage1.tf</a></p>
 
-        The output of the Stage 1 is: 
+        <p>The output of the Stage 1 is:</p>
 
         <code><pre>
             Outputs:
@@ -157,15 +160,15 @@
             k8s_cluster_urn = "do:kubernetes:ba4854df-c6de-4deb-8385-77014b491454"
         </pre></code>
 
-        In my pipeline, I utilize "k8s_cluster_name" output as an input for Stage 2. You can find details in the pipeline listing provided at the end of this article.
+        <p>In my pipeline, I utilize "k8s_cluster_name" output as an input for Stage 2. You can find details in the pipeline listing provided at the end of this article.</p>
 
-        <h1>Stage 2. Configure the Kubernetes cluster and DNS</h1>
+        <h2>Stage 2. Configure the Kubernetes cluster and DNS</h2>
 
-        In Stage 2 of my pipeline, I use a combination of Kubernetes manifests, local command execution, and the creation of DigitalOcean resources to achieve the desired configuration and setup. You can see it in my "kubernetes-config" terraform module: <a href="https://github.com/andygolubev/terraform-digital-ocean/blob/main/infrastructure/digitalocean/infrastructure-modules/kubernetes-config/v1.0/main-stage2.tf">main-stage2.tf</a>
+        <p>In Stage 2 of my pipeline, I use a combination of Kubernetes manifests, local command execution, and the creation of DigitalOcean resources to achieve the desired configuration and setup. You can see it in my "kubernetes-config" terraform module: <a href="https://github.com/andygolubev/terraform-digital-ocean/blob/main/infrastructure/digitalocean/infrastructure-modules/kubernetes-config/v1.0/main-stage2.tf">main-stage2.tf</a></p>
 
-        The "main-stage2.tf" file includes all the essential configurations for Stage 2.
+        <p>The "main-stage2.tf" file includes all the essential configurations for Stage 2.</p>
 
-        The complete content of the file: <a href="https://github.com/andygolubev/terraform-digital-ocean/blob/main/Infrastructure/digitalocean/infrastructure-live/test-v1/stage2/main-stage2.tf">main-stage2.tf</a>
+        <p>The complete content of the file: <a href="https://github.com/andygolubev/terraform-digital-ocean/blob/main/Infrastructure/digitalocean/infrastructure-live/test-v1/stage2/main-stage2.tf">main-stage2.tf</a></p>
 
         <code><pre>
             ...
@@ -191,18 +194,20 @@
             
         </pre></code>
 
-        To illustrate and demonstrate the functionality of the system, I have incorporated three distinct services, each offering unique endpoints:
+        <p>To illustrate and demonstrate the functionality of the system, I have incorporated three distinct services, each offering unique endpoints:</p>
 
-        https://service-1-test-morning.kuber.work
-        https://service-2-test-afternoon.kuber.work
-        https://service-3-test-evening.kuber.work
+        <p>https://service-1-test-morning.kuber.work</p>
+        <p>https://service-2-test-afternoon.kuber.work</p>
+        <p>https://service-3-test-evening.kuber.work</p>
 
-        I do the job in this order:
+        <p>I do the job in this order:</p>
 
-        1. Set up cluster issuers for cert-manager, which are required for TLS certificates management.
-        2. Provisioning of ingress and apply any necessary workarounds as prescribed in the DigitalOcean documentation. <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-with-cert-manager-on-digitalocean-kubernetes"></a>How to Set Up an Nginx Ingress with Cert-Manager on DigitalOcean Kubernetes</a>
-        3. Set up hello services.
-        4.Catch the load balancer ip and provision DNS records.
+        <ol>
+            <li>Set up cluster issuers for cert-manager, which are required for TLS certificates management.</li>
+            <li>Provisioning of ingress and apply any necessary workarounds as prescribed in the DigitalOcean documentation. <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-with-cert-manager-on-digitalocean-kubernetes">How to Set Up an Nginx Ingress with Cert-Manager on DigitalOcean Kubernetes</a></li>
+            <li>Set up hello services.</li>
+            <li>Catch the load balancer ip and provision DNS records.</li>
+        </ol>
 
         <code><pre>
             resource "local_file" "get_load_balancer_script" {
@@ -221,9 +226,9 @@
                 depends_on = [ local_file.get_load_balancer_script, ]
               }              
         </pre></code>
-        In this section, I create and execute a local script that utilizes the "doctl" tool to retrieve the IP address of the load balancer.
+        <p>In this section, I create and execute a local script that utilizes the "doctl" tool to retrieve the IP address of the load balancer.</p>
 
-        And finally get data of the load balancer and use it for DNS records provision
+        <p>And finally get data of the load balancer and use it for DNS records provision</p>
 
         <code><pre>
             data "digitalocean_loadbalancer" "this" {
@@ -247,15 +252,15 @@
               ...
         </pre></code>
 
-        At this point, I have successfully provisioned the required resources and ...
+        <p>At this point, I have successfully provisioned the required resources and ...</p>
 
         <img src="pic03.png" alt="pic03">
 
-        ... have DNS records.
+        <p>... have DNS records.</p>
 
         <img src="pic04.png" alt="pic04">
         
-        How it's time to test our service:
+        <p>How it's time to test our service:</p>
 
         <code><pre>
             ➜  ~ curl https://service-1-test-morning.kuber.work -v
@@ -273,13 +278,16 @@
             Good Morning!
         </pre></code>
 
-        <h1>Automate the process using GitHub actions
-        For the automation I use two separate workflows:
+        <h2>Automate the process using GitHub actions</h2>
 
-        - Provision the infrastructure
-        - Destroy the infrastructure (Manual run)
+        <p>For the automation I use two separate workflows:</p>
 
-        Workflow for the infrastructure provision:
+        <ul>
+            <li>Provision the infrastructure</li>
+            <li>Destroy the infrastructure (Manual run)</li>
+        </ul>
+
+        <p>Workflow for the infrastructure provision:</p>
 
         <code><pre>
             name: 1-Provision-infrastructure
@@ -322,12 +330,12 @@
             
         </pre></code>
 
-        Here I use the output of the Stage 1 as the input for the Stage 2:
-        terraform -chdir=$PATH_STAGE_2 apply -var="digital_ocean_api_token=$DO_API_TOKEN" --auto-approve -var="k8s_cluster_name=$(cd $PATH_STAGE_1 && terraform output -raw k8s_cluster_name)"
-        so this command returns just the cluster name:
-        terraform output -raw k8s_cluster_name
+        <p>Here I use the output of the Stage 1 as the input for the Stage 2:</p>
+        <p>terraform -chdir=$PATH_STAGE_2 apply -var="digital_ocean_api_token=$DO_API_TOKEN" --auto-approve -var="k8s_cluster_name=$(cd $PATH_STAGE_1 && terraform output -raw k8s_cluster_name)"</p>
+        <p>so this command returns just the cluster name:</p>
+        <p>terraform output -raw k8s_cluster_name</p>
         
-        Workflow for the infrastructure destruction:
+        <p>Workflow for the infrastructure destruction:</p>
 
         <code><pre>
             name: 2-Destroy-infrastructure
@@ -367,36 +375,36 @@
 
         </pre></code>
 
-        In this stage, I begin by destroying the resources in Stage 2, followed by the destruction of all remaining resources.
+        <p>In this stage, I begin by destroying the resources in Stage 2, followed by the destruction of all remaining resources.</p>
 
-        To enable multiple runs of my pipelines, it is crucial to include the capability to destroy Stage 1 along with the main resources.
-        To ignore any potential command failures before destruction of Stage 1, I use "|| true" expression.
+        <p>To enable multiple runs of my pipelines, it is crucial to include the capability to destroy Stage 1 along with the main resources.</p>
+        <p>To ignore any potential command failures before destruction of Stage 1, I use "|| true" expression.</p>
 
         <code><pre>
             terraform -chdir=$PATH_STAGE_2 apply -destroy --auto-approve || true
         </pre></code>
 
-        During my exploration, I encountered an issue with DigitalOcean regarding VPC and Project deletion. Despite not observing any associated resources in the console, DigitalOcean indicates that the VPC still possesses resources. Consequently, when attempting to remove the VPC using Terraform, it raises an error due to the inconsistency.
+        <p>During my exploration, I encountered an issue with DigitalOcean regarding VPC and Project deletion. Despite not observing any associated resources in the console, DigitalOcean indicates that the VPC still possesses resources. Consequently, when attempting to remove the VPC using Terraform, it raises an error due to the inconsistency.</p>
         
         <img src="pic05.png" alt="pic05">
 
-        When I rerun the pipeline, this specific step executes without encountering any errors.
+        <p>When I rerun the pipeline, this specific step executes without encountering any errors.</p>
 
 
         <img src="pic06.png" alt="pic06">
 
-        If you experienced this issue, please contact me or drop a comment.
+        <p>If you experienced this issue, please contact me or drop a comment.</p>
 
-        Below, you will find a list of pipeline workflows:
+        <p>Below, you will find a list of pipeline workflows:</p>
 
         <img src="pic07.png" alt="pic07">
 
-        <h1>Conclusion:</h1>
-        In this article, I have demonstrated the process of provisioning various components of infrastructure using Terraform on DigitalOcean. By adopting a two-stage approach, I have overcome the limitations of the Terraform and the DigitalOcean providers.
+        <h2>Conclusion:</h2>
+        <p>In this article, I have demonstrated the process of provisioning various components of infrastructure using Terraform on DigitalOcean. By adopting a two-stage approach, I have overcome the limitations of the Terraform and the DigitalOcean providers.</p>
 
-        You can find all of my code in my GitHub repository: https://github.com/andygolubev/terraform-digital-ocean
+        <p>You can find all of my code in my GitHub repository: <a href="https://github.com/andygolubev/terraform-digital-ocean">https://github.com/andygolubev/terraform-digital-ocean</a></p>
 
-        Feel free to connect with me on LinkedIn: https://www.linkedin.com/in/andy-golubev/
+        <p>Feel free to connect with me on LinkedIn: <a href="https://www.linkedin.com/in/andy-golubev/">https://www.linkedin.com/in/andy-golubev/</a></p>
 
     </body>
 </html>
