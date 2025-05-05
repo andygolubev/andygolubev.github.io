@@ -1,3 +1,12 @@
+.ruler {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 300px;
+  height: 200px;
+  background-color: yellow;
+}
+
 .page {
   --gray-rgb: 0, 0, 0;
   --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
@@ -7,13 +16,13 @@
   --button-secondary-hover: #f2f2f2;
 
   display: grid;
-  grid-template-rows: 20px 1fr 20px;
+  grid-template-rows: 1fr 20px;
   align-items: center;
   justify-items: center;
   min-height: 100svh;
   width: 100%;
-  padding: 40px;
-  gap: 40px;
+  padding: var(--default-offset);
+  gap: var(--default-offset);
   font-family: var(--font-geist-sans);
 }
 
@@ -31,21 +40,158 @@
 .main {
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  grid-row-start: 2;
+  gap: var(--default-offset);
   width: 100%;
 }
 
 .heroSection {
-  height: calc(100svh - 140px);
+  min-height: calc(100svh - 80px);
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: start;
+  overflow: hidden;
+  position: relative;
+  border-radius: 40px;
+}
+
+.heroImage {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.heroTitle {
+  font-family: var(--font-accent);
+  font-size: 80px;
+  font-weight: 300;
+  position: relative;
+
+  .heroTitleName,
+  .heroTitleDescription {
+    display: inline-block;
+    background-color: var(--background);
+    padding-right: var(--default-offset);
+    border-top-right-radius: 40px;
+    position: relative;
+  }
+
+  .heroTitleDescription {
+    font-size: 100px;
+    font-weight: 400;
+  }
+
+  ::after {
+    content: "";
+    position: absolute;
+    right: -40px;
+    bottom: 0px;
+    width: 40px;
+    height: 40px;
+    background: url("/images/smooth-corners/left-bottom.svg") no-repeat center center;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -40px;
+    left: 0px;
+    width: 40px;
+    height: 40px;
+    background: url("/images/smooth-corners/left-bottom.svg") no-repeat center center;
+  }
+}
+
+.aboutSection {
+  min-height: calc(100svh - 80px);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: start;
+  position: relative;
+  margin-left: var(--power-line-offset);
+
+  h2 {
+    font-weight: 600;
+  }
 }
 
+.achievementsSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: calc(var(--default-offset) * 2);
+
+  .achievementsDescription {
+    margin-left: var(--power-line-offset);
+  }
+}
+
+.achievementsTitle {
+  font-size: 60px;
+  display: inline-block;
+  background-color: var(--background);
+  position: relative;
+}
+
+.achievementsCertifications, .achievementsOrganisations {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 40px;
+}
+
+.achievementsCertifications {
+  background-image: url("/images/sky/certsky.jpg");
+}
+
+.achievementsOrganisations {
+  background-image: url("/images/sky/orgsky.jpg");
+}
+
+.achievementsCertifications .achievementsTitle {
+  padding-right: var(--default-offset);
+  border-bottom-right-radius: 40px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: -40px;
+    left: 0px;
+    width: 40px;
+    height: 40px;
+    background: url("/images/smooth-corners/left-top.svg") no-repeat center center;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    right: -40px;
+    top: 0px;
+    width: 40px;
+    height: 40px;
+    background: url("/images/smooth-corners/left-top.svg") no-repeat center center;
+  }
+}
+
+.achievementsOrganisations .achievementsTitle {
+  padding-left: var(--default-offset);
+  
+}
+
+
+.achievementsCertificationsList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: var(--default-offset);
+  gap: var(--default-offset);
+}
+
+
+
+
 .footer {
-  grid-row-start: 3;
   display: flex;
   gap: 24px;
 }

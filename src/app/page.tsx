@@ -1,24 +1,52 @@
 import styles from "./page.module.css";
 import Image from "next/image";
-import Link from "next/link";
+import CertificationItem from "@/components/CertificationItem/CertificationItem";
+import { certifications } from "@/data/certifications";
 
 export default function Home() {
   return (
     <div className={styles.page}>
-      <header className={styles.header}>header</header>
       <main className={styles.main}>
         <section className={styles.heroSection}>
           <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js logo"
-            width={180}
-            height={38}
-            priority
+            className={styles.heroImage}
+            src="/images/hero.jpg"
+            alt="Picture of the author"
+            fill
           />
 
-          <Link href="/articles">Articles</Link>
+          <h1 className={styles.heroTitle}>
+            <span className={styles.heroTitleName}>Andy Golubev</span>
+            <span className={styles.heroTitleDescription}>Cloud Solutions Architect</span>
+          </h1>
+          {/* <div className={styles.ruler}> */}
+
+          {/* </div> */}
         </section>
+
+        <section className={styles.aboutSection}>
+          <p>Hi there! 👋<br></br>I'm a Cloud Solutions Architect passionate about</p>
+          <h2 className={styles.aboutTitle}>Cloud architecture, DevOps practices,  and Kubernetes.</h2>
+        </section>
+
+        <section className={styles.achievementsSection}>
+          <p className={styles.achievementsDescription}>With multiple AWS, GCP, and Kubernetes certifications, I help organizations build scalable and resilient cloud infrastructure.</p>
+          <div className={styles.achievementsCertifications}>
+            <h2 className={styles.achievementsTitle}>Certifications</h2>
+            <div className={styles.achievementsCertificationsList}>
+              {certifications.map(certification => (
+                <CertificationItem key={certification.id} {...certification} />
+              ))}
+            </div>
+          </div>
+          <div className={styles.achievementsOrganisations}>
+            <h2 className={styles.achievementsTitle}>Organisations</h2>
+            <ul>
+              <li>bank</li>
+            </ul>
+          </div>
+        </section>
+
       </main>
       <footer className={styles.footer}>
         <a

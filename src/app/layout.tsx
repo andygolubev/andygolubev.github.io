@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Funnel_Display } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/Header/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,7 +25,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geistSans.variable} ${funnelDisplay.variable}`}>
+
       <body >
+        <Header />
         {children}
       </body>
     </html>
