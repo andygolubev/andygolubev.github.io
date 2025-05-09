@@ -3,9 +3,9 @@ export interface Certification {
     name: string;
     logo: string;
     logoBw: string;
-    link?: string;
-  }
+    link: string;
+}
 
 export interface Certifications {
     certifications: Certification[];
-  }
+}

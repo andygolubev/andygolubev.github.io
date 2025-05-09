@@ -1,7 +1,6 @@
 import styles from "./page.module.css";
 import Image from "next/image";
-import CertificationItem from "@/components/CertificationItem/CertificationItem";
-import { certifications } from "@/data/certifications";
+import Achievements from "@/components/Achievements/Achievements";
 
 export default function Home() {
   return (
@@ -19,9 +18,6 @@ export default function Home() {
             <span className={styles.heroTitleName}>Andy Golubev</span>
             <span className={styles.heroTitleDescription}>Cloud Solutions Architect</span>
           </h1>
-          {/* <div className={styles.ruler}> */}
-
-          {/* </div> */}
         </section>
 
         <section className={styles.aboutSection}>
@@ -29,23 +25,8 @@ export default function Home() {
           <h2 className={styles.aboutTitle}>Cloud architecture, DevOps practices,  and Kubernetes.</h2>
         </section>
 
-        <section className={styles.achievementsSection}>
-          <p className={styles.achievementsDescription}>With multiple AWS, GCP, and Kubernetes certifications, I help organizations build scalable and resilient cloud infrastructure.</p>
-          <div className={styles.achievementsCertifications}>
-            <h2 className={styles.achievementsTitle}>Certifications</h2>
-            <div className={styles.achievementsCertificationsList}>
-              {certifications.map(certification => (
-                <CertificationItem key={certification.id} {...certification} />
-              ))}
-            </div>
-          </div>
-          <div className={styles.achievementsOrganisations}>
-            <h2 className={styles.achievementsTitle}>Organisations</h2>
-            <ul>
-              <li>bank</li>
-            </ul>
-          </div>
-        </section>
+        <Achievements />
+
 
       </main>
       <footer className={styles.footer}>
@@ -54,13 +35,6 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
           Learn
         </a>
         <a
@@ -68,13 +42,6 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
           Examples
         </a>
         <a
@@ -82,13 +49,6 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
           Go to nextjs.org →
         </a>
       </footer>

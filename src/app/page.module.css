@@ -128,69 +128,6 @@
   }
 }
 
-.achievementsTitle {
-  font-size: 60px;
-  display: inline-block;
-  background-color: var(--background);
-  position: relative;
-}
-
-.achievementsCertifications, .achievementsOrganisations {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: 40px;
-}
-
-.achievementsCertifications {
-  background-image: url("/images/sky/certsky.jpg");
-}
-
-.achievementsOrganisations {
-  background-image: url("/images/sky/orgsky.jpg");
-}
-
-.achievementsCertifications .achievementsTitle {
-  padding-right: var(--default-offset);
-  border-bottom-right-radius: 40px;
-
-  &::before {
-    content: "";
-    position: absolute;
-    bottom: -40px;
-    left: 0px;
-    width: 40px;
-    height: 40px;
-    background: url("/images/smooth-corners/left-top.svg") no-repeat center center;
-  }
-
-  &::after {
-    content: "";
-    position: absolute;
-    right: -40px;
-    top: 0px;
-    width: 40px;
-    height: 40px;
-    background: url("/images/smooth-corners/left-top.svg") no-repeat center center;
-  }
-}
-
-.achievementsOrganisations .achievementsTitle {
-  padding-left: var(--default-offset);
-  
-}
-
-
-.achievementsCertificationsList {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  padding: var(--default-offset);
-  gap: var(--default-offset);
-}
-
-
-
-
 .footer {
   display: flex;
   gap: 24px;

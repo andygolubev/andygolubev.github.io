@@ -1,0 +1,142 @@
+.achievementsSection {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: calc(var(--default-offset) * 2);
+
+    .achievementsDescription {
+        margin-left: var(--power-line-offset);
+    }
+}
+
+.achievementsTitle {
+    font-size: 60px;
+    padding-bottom: 10px;
+    display: inline-block;
+    background-color: var(--background);
+    position: relative;
+}
+
+.achievementsCertifications,
+.achievementsOrganisations {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 40px;
+    overflow: hidden;
+}
+
+.achievementsCertifications {
+    background-image: url("/images/sky/certsky.jpg");
+    z-index: 1;
+}
+
+.achievementsCertifications .achievementsTitle {
+    padding-right: var(--default-offset);
+    border-bottom-right-radius: 40px;
+
+    &::before {
+        content: "";
+        position: absolute;
+        bottom: -40px;
+        left: 0px;
+        width: 40px;
+        height: 40px;
+        background: url("/images/smooth-corners/left-top.svg") no-repeat center center;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        right: -40px;
+        top: 0px;
+        width: 40px;
+        height: 40px;
+        background: url("/images/smooth-corners/left-top.svg") no-repeat center center;
+    }
+}
+
+.achievementsCertificationsList {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: var(--default-offset);
+    gap: var(--default-offset);
+}
+
+.achievementsOrganisations {
+    background-image: url("/images/sky/orgsky.jpg");
+    grid-column: 1/3;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: -520px;
+}
+
+.achievementsOrganisationsBlank {
+    grid-column: 2/3;
+    grid-row: 1/3;
+    background-color: var(--background);
+    border-bottom-left-radius: 40px;
+    position: relative;
+
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: -40px;
+        right: 0px;
+        width: 40px;
+        height: 40px;
+        background: url("/images/smooth-corners/right-top.svg") no-repeat center center;
+    }
+}
+
+.achievementsOrganisations .achievementsTitle {
+    padding-left: var(--default-offset);
+    margin-left: var(--power-line-offset);
+    border-bottom-left-radius: 40px;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: -0;
+        left: -40px;
+        width: 40px;
+        height: 40px;
+        background: url("/images/smooth-corners/right-top.svg") no-repeat center center;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: -40px;
+        right: 0px;
+        width: 40px;
+        height: 40px;
+        background: url("/images/smooth-corners/right-top.svg") no-repeat center center;
+    }
+}
+
+.achievementsOrganisationsFeatured {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    grid-row: 2/4;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: calc(var(--default-offset) * 2) var(--default-offset);
+    padding: var(--default-offset);
+}
+
+.achievementsOrganisationsList {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr) 152px;
+    gap: var(--default-offset);
+    padding: var(--default-offset);
+    padding-left: 0;
+}
+
+@media (max-width: 1630px) {
+    .achievementsOrganisationsList> :last-child {
+        display: none;
+    }
+}
