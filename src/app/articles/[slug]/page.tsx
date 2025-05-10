@@ -1,13 +1,9 @@
-// This is needed for dynamic routes
-// function generateStaticParams() {
-//     // return [
-//     //     { slug: 'article-1' },
-//     //     { slug: 'article-2' },
-//     //     { slug: 'article-3' },
-//     // ]
-// }
+import styles from "./page.module.css";
+
 export default function Page({ params }: { params: { slug: string } }) {
     return (
-        <h1 className="accent-font">Article {params.slug}</h1>
+        <div className={styles.articleContainer}>
+            <h1 className={styles.articleTitle}>Article {params.slug}</h1>
+        </div>
     )
   }

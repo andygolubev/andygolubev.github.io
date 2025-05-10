@@ -6,21 +6,22 @@
     gap: 20px;
     width: 100%;
     text-align: center;
+
+    &:hover {
+        .certificationItemLogo {
+            opacity: 1;
+        }
+
+        .certificationItemLogoBw {
+            opacity: 0;
+        }
+    }
 }
 
 .certificationItemLogoContainer {
     position: relative;
     width: 150px;
     height: 150px;
-
-    &:hover {
-        .certificationItemLogo {
-            opacity: 1;
-        }
-        .certificationItemLogoBw {
-            opacity: 0;
-        }
-    }
 }
 
 .certificationItemLogo {

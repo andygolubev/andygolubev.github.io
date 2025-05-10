@@ -6,12 +6,6 @@
     gap: 20px;
     width: 100%;
     text-align: center;
-}
-
-.organisationItemLogoContainer {
-    position: relative;
-    width: 290px;
-    height: 85px;
 
     &:hover {
         .organisationItemLogo {
@@ -22,6 +16,12 @@
             opacity: 0;
         }
     }
+}
+
+.organisationItemLogoContainer {
+    position: relative;
+    width: 290px;
+    height: 85px;
 }
 
 .organisationItemLogo {

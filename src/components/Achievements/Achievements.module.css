@@ -5,6 +5,7 @@
 
     .achievementsDescription {
         margin-left: var(--power-line-offset);
+        margin-top: 22px;
     }
 }
 

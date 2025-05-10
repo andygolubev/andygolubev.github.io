@@ -1,0 +1,83 @@
+.articleItem {
+    border-radius: 40px;
+    padding: 1px;
+    min-height: 328px;
+    display: grid;
+    grid-template-rows: 1fr 80px 2px;
+    background-size: 110%;
+    background-position: 0;
+    transition: all 2s ease-in-out;
+
+    &:nth-child(6n+1) {
+        background-image: url('/images/sky/art-v1.jpg');
+    }
+
+    &:nth-child(6n+2) {
+        background-image: url('/images/sky/art-v2.jpg');
+    }
+
+    &:nth-child(6n+3) {
+        background-image: url('/images/sky/art-v3.jpg');
+    }
+
+    &:nth-child(6n+4) {
+        background-image: url('/images/sky/art-v4.jpg');
+    }
+
+    &:nth-child(6n+5) {
+        background-image: url('/images/sky/art-v5.jpg');
+    }
+
+    &:nth-child(6n) {
+        background-image: url('/images/sky/art-v6.jpg');
+    }
+
+    &:hover {
+        background-position: -50px 10px;
+    }
+
+    h3 {
+        font-size: 32px;
+        font-weight: 400;
+        color: var(--text);
+        padding: var(--default-offset);
+        background-color: var(--background);
+        border-radius: 39px;
+        border-bottom-right-radius: 0;
+        height: 100%;
+    }
+
+    .articleItemButtonContainer {
+        display: grid;
+        grid-template-columns: var(--power-line-offset) 1fr;
+        width: 100%;
+        height: calc(var(--default-offset) * 2 + 2px);
+    }
+
+    .articleItemLink {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        font-weight: 400;
+        color: var(--text);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .articleItemBlank {
+        background-color: var(--background);
+        border-bottom-right-radius: 39px;
+        border-bottom-left-radius: 39px;
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0px;
+            left: -40px;
+            width: 40px;
+            height: 40px;
+            background: url("/images/smooth-corners/right-top.svg") no-repeat center center;
+        }
+    }
+}

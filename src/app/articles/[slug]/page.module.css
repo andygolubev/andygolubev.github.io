@@ -1,0 +1,7 @@
+.articleContainer {
+    padding: var(--default-offset);
+}
+
+.articleTitle {
+    font-size: 40px;
+}

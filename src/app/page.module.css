@@ -16,7 +16,6 @@
   --button-secondary-hover: #f2f2f2;
 
   display: grid;
-  grid-template-rows: 1fr 20px;
   align-items: center;
   justify-items: center;
   min-height: 100svh;
@@ -76,6 +75,10 @@
     padding-right: var(--default-offset);
     border-top-right-radius: 40px;
     position: relative;
+  }
+
+  .heroTitleDescription {
+    display: block;
   }
 
   .heroTitleDescription {

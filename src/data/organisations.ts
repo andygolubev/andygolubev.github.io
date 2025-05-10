@@ -35,7 +35,7 @@ export const organisations: Organisation[] = [
         country: "Israel",
         logo: "/images/organisations/color/globalremit.svg",
         logoBw: "/images/organisations/globalremit.svg",
-        link: "https://www.47globalremit.com"
+        link: "https://global-remit.co.il/"
     },
     {
         id: "Israel Antiquities Authority",
@@ -53,7 +53,7 @@ export const organisations: Organisation[] = [
         country: "UAE",
         logo: "/images/organisations/color/stadik.svg",
         logoBw: "/images/organisations/stadik.svg",
-        link: "https://www.stadik.com"
+        link: "https://www.stadik-group.com/"
     },
     {
         id: "Ameriabank",
