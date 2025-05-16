@@ -1,31 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Backup tool using AWS Batch, ECS and Fargate for backuping objects from other clouds</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../styles.css">
-    </head>
-    <body class="article-page">
-        <div class="article-container">
-            <h1>Backup tool using AWS Batch, ECS and Fargate for backuping objects from other clouds </h1>
-            <h2>Date: 13 February 2024</h2>
+# Backup tool using AWS Batch, ECS and Fargate for backuping objects from other clouds
 
-            <img src="logo.jpg" alt="logo">
+**Date: 13 February 2024**
 
-            <h2>Introduction</h2>
-            <p>Sometimes we have to do dull tasks like setting up a backup system. We want to do it in the easiest and cheapest way possible. That's why I think AWS gives us lots of services to do it smoothly.</p>
-            <p>Because my computing stuff is on Digital Ocean, I couldn't use AWS Backup. So I looked at services that can provide infrequent workload and don't cost anything when they're not busy. For this plan, I picked AWS Batch with ECS on Fargate. And I use Event Bridge scheduler to start the jobs.</p>
-            <p>For this plan, I picked AWS Batch with ECS on Fargate. And I use Event Bridge scheduler to start the jobs.</p>
-            
-            <h2>Solution</h2>
-            <p>This is a general picture of my solution.</p>
-            
-            <img src="pic01.jpg" alt="pic01">
-            
-            <p>I'm setting up everything using AWS CloudFormation.</p>
-            
-            <pre>
+![logo](/articles/backup-tool-using-aws-batch-ecs-and-fargate-for-backuping-objects-from-other-clouds/logo.jpg)
+
+## Introduction
+
+Sometimes we have to do dull tasks like setting up a backup system. We want to do it in the easiest and cheapest way possible. That's why I think AWS gives us lots of services to do it smoothly.
+
+Because my computing stuff is on Digital Ocean, I couldn't use AWS Backup. So I looked at services that can provide infrequent workload and don't cost anything when they're not busy. For this plan, I picked AWS Batch with ECS on Fargate. And I use Event Bridge scheduler to start the jobs.
+
+## Solution
+
+This is a general picture of my solution.
+
+![solution diagram](/articles/backup-tool-using-aws-batch-ecs-and-fargate-for-backuping-objects-from-other-clouds/pic01.jpg)
+
+I'm setting up everything using AWS CloudFormation.
+
+```
 ...
     BackuperComputeEnvironment:
     Type: AWS::Batch::ComputeEnvironment
@@ -93,12 +86,11 @@
         Tags: {"Name" : "BackuperJobDefinition", "CreatedBy" : "CloudFormationStack", "App" : "Backuper"}
 
 ...
-            </pre>
-            
-            <p>I use my Docker Image with built-in bash scripts.</p>
-            
-            <pre>
+```
 
+I use my Docker Image with built-in bash scripts.
+
+```
 FROM ubuntu:22.04
 WORKDIR /tmp
 
@@ -170,49 +162,38 @@ RUN chmod +x /backuper/s3_backup_script.sh
 RUN chmod +x /backuper/postgre_backup_script.sh
 
 ENTRYPOINT ["/bin/bash", "-c",  "/backuper/s3_backup_script.sh && /bin/bash -c /backuper/postgre_backup_script.sh"]
+```
 
-            </pre>
-            
-            <p>Once the CloudFormation stack is deployed successfully, we can see all the resources that have been created.</p>
-            
-            <img src="pic02.jpg" alt="pic02">
+Once the CloudFormation stack is deployed successfully, we can see all the resources that have been created.
 
-            <p>And as you can see, our AWS Batch service is fully set up and waiting for a trigger event.</p>
-            
-            <p>The scheduler is set with these configurations, and the cron will initiate an event at 8 AM UTC.</p>
-            
-            <img src="pic03.jpg" alt="pic03">
-            
-            <p>We have an Event Bridge rule that sifts through Batch Job-related events, keeping sensitive data out, and then sends them to the SNS Topic.</p>
-            
-            <img src="pic04.jpg" alt="pic04">
-                        
-            <img src="pic05.jpg" alt="pic05">
-            
+![resources](/articles/backup-tool-using-aws-batch-ecs-and-fargate-for-backuping-objects-from-other-clouds/pic02.jpg)
 
-            <p>After running our job (either manually or by the scheduler), we can see it on our dashboard and receive emails with the job's status.</p>
-            
-            <img src="pic06.jpg" alt="pic06">
-            
-            <p>The result notification looks like this.</p>
-            
-            <img src="pic07.jpg" alt="pic07">
-            
-            <h2>Conclusion</h2>
-            <p>Here's an example of how you can handle occasional workloads efficiently with AWS Batch + ECS + Fargate, all while keeping costs down. Give it a shot!</p>
-            
-            <p>I hope you enjoy this article.</p>
-            
-            <p>You can find all of my code in my GitHub repository: <a href="https://github.com/andygolubev/aws-backup-with-batch-and-fargate">https://github.com/andygolubev/aws-backup-with-batch-and-fargate</a></p>
-            
-            <p>Feel free to connect with me on LinkedIn: <a href="https://www.linkedin.com/in/andy-golubev/">https://www.linkedin.com/in/andy-golubev/</a></p>
- 
-        </div>
-    </body>
-</html>
+And as you can see, our AWS Batch service is fully set up and waiting for a trigger event.
 
+The scheduler is set with these configurations, and the cron will initiate an event at 8 AM UTC.
 
+![scheduler](/articles/backup-tool-using-aws-batch-ecs-and-fargate-for-backuping-objects-from-other-clouds/pic03.jpg)
 
+We have an Event Bridge rule that sifts through Batch Job-related events, keeping sensitive data out, and then sends them to the SNS Topic.
 
+![event bridge rule](/articles/backup-tool-using-aws-batch-ecs-and-fargate-for-backuping-objects-from-other-clouds/pic04.jpg)
 
+![event bridge rule details](/articles/backup-tool-using-aws-batch-ecs-and-fargate-for-backuping-objects-from-other-clouds/pic05.jpg)
 
+After running our job (either manually or by the scheduler), we can see it on our dashboard and receive emails with the job's status.
+
+![job dashboard](/articles/backup-tool-using-aws-batch-ecs-and-fargate-for-backuping-objects-from-other-clouds/pic06.jpg)
+
+The result notification looks like this.
+
+![notification email](/articles/backup-tool-using-aws-batch-ecs-and-fargate-for-backuping-objects-from-other-clouds/pic07.jpg)
+
+## Conclusion
+
+Here's an example of how you can handle occasional workloads efficiently with AWS Batch + ECS + Fargate, all while keeping costs down. Give it a shot!
+
+I hope you enjoy this article.
+
+You can find all of my code in my GitHub repository: [https://github.com/andygolubev/aws-backup-with-batch-and-fargate](https://github.com/andygolubev/aws-backup-with-batch-and-fargate)
+
+Feel free to connect with me on LinkedIn: [https://www.linkedin.com/in/andy-golubev/](https://www.linkedin.com/in/andy-golubev/) 

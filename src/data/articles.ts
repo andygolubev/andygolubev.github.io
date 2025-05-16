@@ -3,7 +3,7 @@ import { Article } from "@/types/articles";
 export const articles: Article[] = [
     {
         id: "6",
-        slug: "monitoring-multiple-k8s-clusters-on-digital-ocean-with-prometheus-and-grafana-deployed-using-terraform-and-ansible-role",
+        slug: "monitoring-multiple-k8s-clusters-with-prometheus-and-grafana-deployed-using-terraform-and-ansible-role",
         title: "Monitoring multiple k8s clusters on Digital Ocean with Prometheus and Grafana deployed using Terraform and Ansible role",
     },
     {
@@ -30,6 +30,6 @@ export const articles: Article[] = [
     {
         id: "1",
         slug: "terraform-and-digitalocean-automating-infrastructure-and-catching-the-hidden-load-balancer",
-        title: "Terraform and DigitalOcean: Automating Infrastructure and Catching the Hidden Load Balancer",
+        title: "Terraform and DigitalOcean: Automating Infrastructure and Catching the Hidden Load Balancer",
     },
 ];

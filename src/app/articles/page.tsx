@@ -1,3 +1,5 @@
+"use client"
+
 import ArticleItem from '@/components/ArticleItem/ArticleItem';
 import { articles } from '@/data/articles';
 import styles from './page.module.css';
