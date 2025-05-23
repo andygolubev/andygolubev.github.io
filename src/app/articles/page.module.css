@@ -16,9 +16,6 @@
     a {
         min-height: 200px;
     }
-    h3 {
-        font-size: 18px;
-    } 
 }
 
 @media (width <=800px) {

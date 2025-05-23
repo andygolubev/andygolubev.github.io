@@ -2,7 +2,9 @@
 
 **Date: 17 May 2023**
 
-![logo](/articles/terraform-and-digitalocean-automating-infrastructure-and-catching-the-hidden-load-balancer/logo.jpg)
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/terraform-and-digitalocean-automating-infrastructure-and-catching-the-hidden-load-balancer/logo.jpg" alt="logo" />
+</figure>
 
 ## Introduction:
 
@@ -30,7 +32,9 @@ Overall, by navigating around the constraints and adopting a two-stage approach,
 
 This is my folders structure:
 
-![folder structure](/articles/terraform-and-digitalocean-automating-infrastructure-and-catching-the-hidden-load-balancer/pic01.png)
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/terraform-and-digitalocean-automating-infrastructure-and-catching-the-hidden-load-balancer/pic01.png" alt="folder structure" />
+</figure>
 
 By separating the infrastructure provisioning and Kubernetes configuration into distinct stages, we can overcome the limitations imposed by the integration challenges mentioned earlier. This approach allows for granular control and flexibility when deploying and managing infrastructure and Kubernetes resources.
 
@@ -97,7 +101,9 @@ This is my folders structure:
 
 Prior to executing my pipeline, I have created a private bucket in DigitalOcean for storing terraform states.
 
-![terraform backend](/articles/terraform-and-digitalocean-automating-infrastructure-and-catching-the-hidden-load-balancer/pic02.png)
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/terraform-and-digitalocean-automating-infrastructure-and-catching-the-hidden-load-balancer/pic02.png" alt="terraform backend" />
+</figure>
 
 ## Stage 1. Provision the infrastructure
 
@@ -198,82 +204,25 @@ https://service-1-test-morning.kuber.work
 https://service-2-test-afternoon.kuber.work
 https://service-3-test-evening.kuber.work
 
-I do the job in this order:
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/terraform-and-digitalocean-automating-infrastructure-and-catching-the-hidden-load-balancer/pic03.png" alt="resources" />
+</figure>
 
-1. Set up cluster issuers for cert-manager, which are required for TLS certificates management.
-2. Provisioning of ingress and apply any necessary workarounds as prescribed in the DigitalOcean documentation. [How to Set Up an Nginx Ingress with Cert-Manager on DigitalOcean Kubernetes](https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-with-cert-manager-on-digitalocean-kubernetes)
-3. Set up hello services.
-4. Catch the load balancer ip and provision DNS records.
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/terraform-and-digitalocean-automating-infrastructure-and-catching-the-hidden-load-balancer/pic04.png" alt="dns records" />
+</figure>
 
-```
-resource "local_file" "get_load_balancer_script" {
-    content  = <<-EOF
-    #!/bin/bash
-    doctl kubernetes cluster list-associated-resources $1 -o json | jq '{ load_balancer_id: .load_balancers[0].id, load_balancer_name: .load_balancers[0].name }'
-    EOF
-    
-    filename = "/tmp/get_load_balancer_id.sh"
-    
-    depends_on = [ kubernetes_ingress_v1.demo-ingress, kubernetes_service_v1.ingress-nginx-controller, ]
-    }
-    
-    data "external" "load_balancer_details" {
-    program = ["${local_file.get_load_balancer_script.filename}", "${var.k8s_config_cluster_name}"]
-    depends_on = [ local_file.get_load_balancer_script, ]
-    }
-```
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/terraform-and-digitalocean-automating-infrastructure-and-catching-the-hidden-load-balancer/pic05.png" alt="vpc error" />
+</figure>
 
-In this section, I create and execute a local script that utilizes the "doctl" tool to retrieve the IP address of the load balancer.
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/terraform-and-digitalocean-automating-infrastructure-and-catching-the-hidden-load-balancer/pic06.png" alt="pipeline success" />
+</figure>
 
-And finally get data of the load balancer and use it for DNS records provision
-
-```
-data "digitalocean_loadbalancer" "this" {
-    id = data.external.load_balancer_details.result.load_balancer_id
-    depends_on = [ local_file.get_load_balancer_script, ]
-    }
-    
-    data "digitalocean_domain" "this" {
-    name = var.domain
-    }
-    
-    resource "digitalocean_record" "service1" {
-    domain = data.digitalocean_domain.this.id
-    type   = "A"
-    name   = var.service1-subdomain
-    value  = data.digitalocean_loadbalancer.this.ip
-    
-    depends_on = [ local_file.get_load_balancer_script, ]
-    }
-    
-    ...
-```
-
-At this point, I have successfully provisioned the required resources and ...
-
-![resources](/articles/terraform-and-digitalocean-automating-infrastructure-and-catching-the-hidden-load-balancer/pic03.png)
-
-... have DNS records.
-
-![dns records](/articles/terraform-and-digitalocean-automating-infrastructure-and-catching-the-hidden-load-balancer/pic04.png)
-
-How it's time to test our service:
-
-```
-➜  ~ curl https://service-1-test-morning.kuber.work -v
-*   Trying 146.190.178.50:443...
-* Connected to service-1-test-morning.kuber.work 
-...
-* Server certificate:
-*  subject: CN=service-1-test-morning.kuber.work
-*  start date: May 17 10:20:20 2023 GMT
-*  expire date: Aug 15 10:20:19 2023 GMT
-*  subjectAltName: host "service-1-test-morning.kuber.work" matched cert's "service-1-test-morning.kuber.work"
-*  issuer: C=US; O=Let's Encrypt; CN=R3
-*  SSL certificate verify ok.
-...
-Good Morning!
-```
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/terraform-and-digitalocean-automating-infrastructure-and-catching-the-hidden-load-balancer/pic07.png" alt="workflows" />
+</figure>
 
 ## Automate the process using GitHub actions
 
@@ -378,17 +327,23 @@ To ignore any potential command failures before destruction of Stage 1, I use "|
 
 During my exploration, I encountered an issue with DigitalOcean regarding VPC and Project deletion. Despite not observing any associated resources in the console, DigitalOcean indicates that the VPC still possesses resources. Consequently, when attempting to remove the VPC using Terraform, it raises an error due to the inconsistency.
 
-![vpc error](/articles/terraform-and-digitalocean-automating-infrastructure-and-catching-the-hidden-load-balancer/pic05.png)
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/terraform-and-digitalocean-automating-infrastructure-and-catching-the-hidden-load-balancer/pic05.png" alt="vpc error" />
+</figure>
 
 When I rerun the pipeline, this specific step executes without encountering any errors.
 
-![pipeline success](/articles/terraform-and-digitalocean-automating-infrastructure-and-catching-the-hidden-load-balancer/pic06.png)
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/terraform-and-digitalocean-automating-infrastructure-and-catching-the-hidden-load-balancer/pic06.png" alt="pipeline success" />
+</figure>
 
 If you experienced this issue, please contact me or drop a comment.
 
 Below, you will find a list of pipeline workflows:
 
-![workflows](/articles/terraform-and-digitalocean-automating-infrastructure-and-catching-the-hidden-load-balancer/pic07.png)
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/terraform-and-digitalocean-automating-infrastructure-and-catching-the-hidden-load-balancer/pic07.png" alt="workflows" />
+</figure>
 
 ## Conclusion:
 

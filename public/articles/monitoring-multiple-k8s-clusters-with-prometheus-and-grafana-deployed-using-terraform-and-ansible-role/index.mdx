@@ -2,7 +2,9 @@
 
 **Date: 27 August 2024**
 
-![logo](/articles/monitoring-multiple-k8s-clusters-with-prometheus-and-grafana-deployed-using-terraform-and-ansible-role/logo.jpg)
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/monitoring-multiple-k8s-clusters-with-prometheus-and-grafana-deployed-using-terraform-and-ansible-role/logo.jpg" alt="logo" />
+</figure>
 
 ## Introduction
 
@@ -29,7 +31,9 @@ There are three VPCs. Two of them host the clusters, and the third one contains 
 
 Grafana connects to each cluster and pulls data for the dashboard. This setup ensures that traffic only flows when the dashboard is being viewed. Authentication is handled at the ingress.
 
-![solution](/articles/monitoring-multiple-k8s-clusters-with-prometheus-and-grafana-deployed-using-terraform-and-ansible-role/pic01-solution.jpg)
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/monitoring-multiple-k8s-clusters-with-prometheus-and-grafana-deployed-using-terraform-and-ansible-role/pic01-solution.jpg" alt="solution" />
+</figure>
 
 ## Tools
 
@@ -100,7 +104,9 @@ The Ansible role handles the issuance of certificates, installs Nginx, sets up G
 
 Here is an example of how the final dashboard looks:
 
-![dashboard](/articles/monitoring-multiple-k8s-clusters-with-prometheus-and-grafana-deployed-using-terraform-and-ansible-role/pic02-grafana.jpg)
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/monitoring-multiple-k8s-clusters-with-prometheus-and-grafana-deployed-using-terraform-and-ansible-role/pic02-grafana.jpg" alt="dashboard" />
+</figure>
 
 ## Conclusion
 
