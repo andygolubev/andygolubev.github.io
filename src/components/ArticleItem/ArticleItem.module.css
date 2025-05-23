@@ -4,9 +4,10 @@
     min-height: 328px;
     display: grid;
     grid-template-rows: 1fr 80px 2px;
-    background-size: 110%;
-    background-position: 0;
+    background-size: 115%;
+    background-position: left 0 bottom 0;
     transition: all 2s ease-in-out;
+    container-type: inline-size;
 
     &:nth-child(6n+1) {
         background-image: url('/images/sky/art-v1.jpg');
@@ -33,7 +34,7 @@
     }
 
     &:hover {
-        background-position: -50px 10px;
+        background-position: left -50px bottom -10px;
     }
 
     h3 {
@@ -78,6 +79,44 @@
             width: 40px;
             height: 40px;
             background: url("/images/smooth-corners/right-top.svg") no-repeat center center;
+        }
+    }
+
+}
+
+@media (width <=1520px) {
+    .articleItem {
+        min-height: 200px;
+
+        h3 {
+            font-size: 24px;
+
+        }
+
+        .articleItemButtonContainer {
+            height: calc(var(--default-offset) * 2 + 22px);
+        }
+    }
+}
+
+@media (width <=580px) {
+
+    .articleItem {
+        background-size: 100%;
+        /* background-position: bottom 0 left 0; */
+
+        h3 {
+            font-size: 16px;
+        }
+
+        .articleItemButtonContainer {
+            height: calc(var(--default-offset) * 2 + 42px);
+        }
+
+        .articleItemLink {
+            font-size: 16px;
+            justify-content: start;
+            padding-left: var(--default-offset);
         }
     }
 }

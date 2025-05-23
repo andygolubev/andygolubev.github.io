@@ -21,3 +21,14 @@
     } 
 }
 
+@media (width <=800px) {
+    .articlesContainer {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (width <=580px) {
+    .articlesPage {
+        padding-top: 100px;
+    }
+}

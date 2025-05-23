@@ -41,3 +41,34 @@
         translate: 0 -3px;
     }
 }
+
+@media (width <=1520px) {
+    .footerContainer {
+        min-height: 220px;
+
+        h2 {
+            font-size: 40px;
+        }
+    }
+}
+
+@media (width <=580px) {
+    .footer {
+        padding-top: 100px;
+    }
+
+    .footerContainer {
+        gap: 20px;
+        min-height: unset;
+        padding-top: calc(var(--default-offset)*2);
+
+        h2 {
+            font-size: 30px;
+        }
+
+        .footerLinks {
+            position: relative;
+            bottom: 0;
+        }
+    }
+}

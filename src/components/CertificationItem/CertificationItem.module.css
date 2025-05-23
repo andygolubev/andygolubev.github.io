@@ -38,3 +38,10 @@
     opacity: 1;
     transition: opacity 0.6s ease-in-out;
 }
+
+@media (width <= 1520px) {
+    .certificationItemLogoContainer {
+        width: 100px;
+        height: 100px;
+    }
+}

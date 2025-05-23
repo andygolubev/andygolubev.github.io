@@ -1,9 +1,11 @@
 :root {
+  font-size: 16px;
   --background: #ffffff;
   --foreground: #48464A;
   --font-primary: var(--font-geist-sans);
   --font-accent: var(--font-funnel-display);
   --default-offset: 40px;
+  --default-radius: 40px;
   --power-line-offset: 268px;
 }
 
@@ -51,5 +53,19 @@ h1, h2 {
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
+  }
+}
+
+@media (width <= 1520px) {
+  :root {
+    --default-offset: 30px;
+    --power-line-offset: 212px;
+  }
+}
+
+@media (width <= 580px) {
+  :root {
+    --default-offset: 20px;
+    font-size: 14px;
   }
 }

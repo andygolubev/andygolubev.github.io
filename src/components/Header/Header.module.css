@@ -58,3 +58,21 @@
     height: 40px;
     background: url("/images/smooth-corners/right-top.svg") no-repeat center center;
 }
+
+@media (width <= 580px) {
+    .nav {
+        justify-content: space-around;
+        padding-left: 0;
+        width: 100%;
+    }
+
+    .nav::before {
+        content: "";
+    position: absolute;
+    left: 0;
+    bottom: -40px;
+    width: 40px;
+    height: 40px;
+    background: url("/images/smooth-corners/left-top.svg") no-repeat center center;
+    }
+}
