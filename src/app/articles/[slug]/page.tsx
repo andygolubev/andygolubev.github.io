@@ -1,57 +1,39 @@
-"use client"
-
-import { useEffect, useState } from 'react';
-import styles from "./page.module.css";
-import dynamic from 'next/dynamic';
 import { notFound } from 'next/navigation';
-import { use } from 'react';
 import { articles } from '@/data/articles';
+import styles from './page.module.css';
 
-export default function Page({ params }: { params: { slug: string } | Promise<{ slug: string }> }) {
-    // Properly unwrap params with React.use() to fix the warning
-    const unwrappedParams = params instanceof Promise ? use(params) : params;
-    const slug = unwrappedParams.slug;
+type MDXComponent = () => Promise<{ default: React.ComponentType }>;
 
-    const [ArticleContent, setArticleContent] = useState<React.ComponentType | null>(null);
-    const [loading, setLoading] = useState(true);
+// 1. Static mapping from slug to MDX import
+const articleComponents: Record<string, MDXComponent> = {
+    'automate-publishing-markdown-files-from-github-to-confluence-with-github-to-confluence-publisher-tool': () => import('@/../public/articles/automate-publishing-markdown-files-from-github-to-confluence-with-github-to-confluence-publisher-tool/index.mdx'),
+    'aws-serverless-image-recognition-telegram-bot-using-terraform': () => import('@/../public/articles/aws-serverless-image-recognition-telegram-bot-using-terraform/index.mdx'),
+    'backup-tool-using-aws-batch-ecs-and-fargate-for-backuping-objects-from-other-clouds': () => import('@/../public/articles/backup-tool-using-aws-batch-ecs-and-fargate-for-backuping-objects-from-other-clouds/index.mdx'),
+    'kubernetes-the-hard-way-on-aws-with-packer-and-terraform': () => import('@/../public/articles/kubernetes-the-hard-way-on-aws-with-packer-and-terraform/index.mdx'),
+    'monitoring-multiple-k8s-clusters-with-prometheus-and-grafana-deployed-using-terraform-and-ansible-role': () => import('@/../public/articles/monitoring-multiple-k8s-clusters-with-prometheus-and-grafana-deployed-using-terraform-and-ansible-role/index.mdx'),
+    'terraform-and-digitalocean-automating-infrastructure-and-catching-the-hidden-load-balancer': () => import('@/../public/articles/terraform-and-digitalocean-automating-infrastructure-and-catching-the-hidden-load-balancer/index.mdx'),
+};
 
-    useEffect(() => {
-        // First validate if the slug exists in our articles data
-        const articleExists = articles.some(article => article.slug === slug);
+// 2. generateStaticParams for static export
+export async function generateStaticParams() {
+    return articles.map(article => ({ slug: article.slug }));
+}
 
-        if (!articleExists) {
-            // If article doesn't exist, trigger not found
-            notFound();
-            return;
-        }
-
-        const loadArticle = async () => {
-            try {
-                // Dynamic import of the MDX file based on slug
-                const Article = dynamic(() => import(`@/../public/articles/${slug}/index.mdx`), {
-                    loading: () => <div>Loading article...</div>,
-                    ssr: false,
-                });
-                setArticleContent(() => Article);
-            } catch (e) {
-                console.error("Failed to load article:", e);
-                notFound();
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        loadArticle();
-    }, [slug]);
-
-    // Show loading state while checking if article exists
-    if (loading && !ArticleContent) {
-        return <div className={styles.articleContainer}>Loading article...</div>;
+// Await params for compatibility with Next.js static export
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await params;
+    if (!articles.some(article => article.slug === slug)) {
+        notFound();
     }
-
+    const importMDX = articleComponents[slug];
+    if (!importMDX) {
+        notFound();
+    }
+    const { default: ArticleContent } = await importMDX();
+    // If you use custom MDX components, ensure they are server-compatible and not client-only.
     return (
         <div className={styles.articleContainer}>
-            {ArticleContent ? <ArticleContent /> : notFound()}
+            <ArticleContent />
         </div>
     );
 }

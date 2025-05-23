@@ -2,7 +2,9 @@
 
 **Date: 27 June 2023**
 
-![logo](/articles/aws-serverless-image-recognition-telegram-bot-using-terraform/logo.jpg)
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/aws-serverless-image-recognition-telegram-bot-using-terraform/logo.jpg" alt="logo" />
+</figure>
 
 ## Introduction
 
@@ -18,7 +20,9 @@ The diagram below illustrates the complete solution, employing a range of AWS se
 
 At the heart of the architecture lies the Lambda function, playing a pivotal role in executing the desired operations. To optimize the efficiency of Lambda deployments and accelerate initialization, Lambda layers are employed. These layers contain all the necessary dependencies, streamlining the deployment process and facilitating faster development iterations.
 
-![architecture diagram](/articles/aws-serverless-image-recognition-telegram-bot-using-terraform/pic01.png)
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/aws-serverless-image-recognition-telegram-bot-using-terraform/pic01.png" alt="architecture diagram" />
+</figure>
 
 To ensure the security of sensitive information, such as the BOT Token, I utilize Secrets Manager. This secure vault enables all lambdas to access the token directly, eliminating the need to store it in environment variables.
 
@@ -52,9 +56,13 @@ Optional Step: Set Bot Avatar Image
 
 You can see it in the screenshots:
 
-![bot setup screenshot 1](/articles/aws-serverless-image-recognition-telegram-bot-using-terraform/pic02.png)
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/aws-serverless-image-recognition-telegram-bot-using-terraform/pic02.png" alt="bot setup screenshot 1" />
+</figure>
 
-![bot setup screenshot 2](/articles/aws-serverless-image-recognition-telegram-bot-using-terraform/pic03.png)
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/aws-serverless-image-recognition-telegram-bot-using-terraform/pic03.png" alt="bot setup screenshot 2" />
+</figure>
 
 ## Terraform project
 
@@ -154,9 +162,13 @@ jobs:
 
 I store a few secrets and one variable securely on GitHub. You should do the same if you want to use my code.
 
-![GitHub secrets](/articles/aws-serverless-image-recognition-telegram-bot-using-terraform/pic04.png)
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/aws-serverless-image-recognition-telegram-bot-using-terraform/pic04.png" alt="GitHub secrets" />
+</figure>
 
-![GitHub variables](/articles/aws-serverless-image-recognition-telegram-bot-using-terraform/pic05.png)
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/aws-serverless-image-recognition-telegram-bot-using-terraform/pic05.png" alt="GitHub variables" />
+</figure>
 
 And I provide three workflows that simplify the deployment and management process of the bot:
 
@@ -172,7 +184,9 @@ The second workflow automates the provisioning of all the services required by t
 
 The final workflow focuses on the controlled destruction of the infrastructure managed by Terraform. This process ensures the efficient cleanup of resources when they are no longer needed.
 
-![GitHub workflows](/articles/aws-serverless-image-recognition-telegram-bot-using-terraform/pic06.png)
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/aws-serverless-image-recognition-telegram-bot-using-terraform/pic06.png" alt="GitHub workflows" />
+</figure>
 
 While utilizing Step 1, it is crucial to exercise caution. As S3 buckets have a global namespace, conflicts may arise when selecting bucket names. To mitigate this, it may be necessary to modify bucket names prefix. This ensures uniqueness and prevents naming conflicts within the global S3 namespace.
 
@@ -182,17 +196,27 @@ To provide a clearer understanding of the bot's operation, I present a few scree
 
 ### Image Recognition:
 
-![demo image 1](/articles/aws-serverless-image-recognition-telegram-bot-using-terraform/pic07.png)
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/aws-serverless-image-recognition-telegram-bot-using-terraform/pic07.png" alt="demo image 1" />
+</figure>
 
-![demo image 2](/articles/aws-serverless-image-recognition-telegram-bot-using-terraform/pic08.png)
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/aws-serverless-image-recognition-telegram-bot-using-terraform/pic08.png" alt="demo image 2" />
+</figure>
 
-![demo image 3](/articles/aws-serverless-image-recognition-telegram-bot-using-terraform/pic09.png)
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/aws-serverless-image-recognition-telegram-bot-using-terraform/pic09.png" alt="demo image 3" />
+</figure>
 
-![demo image 4](/articles/aws-serverless-image-recognition-telegram-bot-using-terraform/pic10.png)
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/aws-serverless-image-recognition-telegram-bot-using-terraform/pic10.png" alt="demo image 4" />
+</figure>
 
 ### Statistics Request:
 
-![statistics screenshot](/articles/aws-serverless-image-recognition-telegram-bot-using-terraform/pic11.png)
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/aws-serverless-image-recognition-telegram-bot-using-terraform/pic11.png" alt="statistics screenshot" />
+</figure>
 
 If you have a Telegram account, I invite you to try out the bot and explore its capabilities firsthand. I provide this bot until the end of July 2023. Further service is not guaranteed because I don't want to go beyond AWS Free Tier.
 

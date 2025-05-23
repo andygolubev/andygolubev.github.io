@@ -1,8 +1,8 @@
 .header {
     display: flex;
     flex-direction: column;
-    justify-content: end;
-    align-items: end;
+    justify-content: flex-end;
+    align-items: flex-end;
     width: 100%;
     position: fixed;
     top: 0;
@@ -13,7 +13,7 @@
 
 .rect {
     width: 100%;
-    height: var(--default-offset);   
+    height: var(--default-offset);
     background-color: var(--background);
     position: relative;
 }
@@ -59,7 +59,7 @@
     background: url("/images/smooth-corners/right-top.svg") no-repeat center center;
 }
 
-@media (width <= 580px) {
+@media (width <=580px) {
     .nav {
         justify-content: space-around;
         padding-left: 0;
@@ -68,11 +68,11 @@
 
     .nav::before {
         content: "";
-    position: absolute;
-    left: 0;
-    bottom: -40px;
-    width: 40px;
-    height: 40px;
-    background: url("/images/smooth-corners/left-top.svg") no-repeat center center;
+        position: absolute;
+        left: 0;
+        bottom: -40px;
+        width: 40px;
+        height: 40px;
+        background: url("/images/smooth-corners/left-top.svg") no-repeat center center;
     }
 }

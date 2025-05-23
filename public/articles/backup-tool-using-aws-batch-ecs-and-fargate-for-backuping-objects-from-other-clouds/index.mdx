@@ -2,7 +2,9 @@
 
 **Date: 13 February 2024**
 
-![logo](/articles/backup-tool-using-aws-batch-ecs-and-fargate-for-backuping-objects-from-other-clouds/logo.jpg)
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/backup-tool-using-aws-batch-ecs-and-fargate-for-backuping-objects-from-other-clouds/logo.jpg" alt="logo" />
+</figure>
 
 ## Introduction
 
@@ -14,7 +16,9 @@ Because my computing stuff is on Digital Ocean, I couldn't use AWS Backup. So I 
 
 This is a general picture of my solution.
 
-![solution diagram](/articles/backup-tool-using-aws-batch-ecs-and-fargate-for-backuping-objects-from-other-clouds/pic01.jpg)
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/backup-tool-using-aws-batch-ecs-and-fargate-for-backuping-objects-from-other-clouds/pic01.jpg" alt="solution diagram" />
+</figure>
 
 I'm setting up everything using AWS CloudFormation.
 
@@ -166,27 +170,39 @@ ENTRYPOINT ["/bin/bash", "-c",  "/backuper/s3_backup_script.sh && /bin/bash -c /
 
 Once the CloudFormation stack is deployed successfully, we can see all the resources that have been created.
 
-![resources](/articles/backup-tool-using-aws-batch-ecs-and-fargate-for-backuping-objects-from-other-clouds/pic02.jpg)
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/backup-tool-using-aws-batch-ecs-and-fargate-for-backuping-objects-from-other-clouds/pic02.jpg" alt="resources" />
+</figure>
 
 And as you can see, our AWS Batch service is fully set up and waiting for a trigger event.
 
 The scheduler is set with these configurations, and the cron will initiate an event at 8 AM UTC.
 
-![scheduler](/articles/backup-tool-using-aws-batch-ecs-and-fargate-for-backuping-objects-from-other-clouds/pic03.jpg)
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/backup-tool-using-aws-batch-ecs-and-fargate-for-backuping-objects-from-other-clouds/pic03.jpg" alt="scheduler" />
+</figure>
 
 We have an Event Bridge rule that sifts through Batch Job-related events, keeping sensitive data out, and then sends them to the SNS Topic.
 
-![event bridge rule](/articles/backup-tool-using-aws-batch-ecs-and-fargate-for-backuping-objects-from-other-clouds/pic04.jpg)
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/backup-tool-using-aws-batch-ecs-and-fargate-for-backuping-objects-from-other-clouds/pic04.jpg" alt="event bridge rule" />
+</figure>
 
-![event bridge rule details](/articles/backup-tool-using-aws-batch-ecs-and-fargate-for-backuping-objects-from-other-clouds/pic05.jpg)
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/backup-tool-using-aws-batch-ecs-and-fargate-for-backuping-objects-from-other-clouds/pic05.jpg" alt="event bridge rule details" />
+</figure>
 
 After running our job (either manually or by the scheduler), we can see it on our dashboard and receive emails with the job's status.
 
-![job dashboard](/articles/backup-tool-using-aws-batch-ecs-and-fargate-for-backuping-objects-from-other-clouds/pic06.jpg)
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/backup-tool-using-aws-batch-ecs-and-fargate-for-backuping-objects-from-other-clouds/pic06.jpg" alt="job dashboard" />
+</figure>
 
 The result notification looks like this.
 
-![notification email](/articles/backup-tool-using-aws-batch-ecs-and-fargate-for-backuping-objects-from-other-clouds/pic07.jpg)
+<figure style={{ margin: "2rem 0" }}>
+  <img src="/articles/backup-tool-using-aws-batch-ecs-and-fargate-for-backuping-objects-from-other-clouds/pic07.jpg" alt="notification email" />
+</figure>
 
 ## Conclusion
 

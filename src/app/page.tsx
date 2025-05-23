@@ -22,13 +22,13 @@ export default function Home() {
         </section>
 
         <section className={styles.aboutSection}>
-          <p>Hi there! 👋<br></br>I'm a Cloud Solutions Architect passionate about</p>
+          <p>Hi there! 👋<br></br>I&apos;m a Cloud Solutions Architect passionate about</p>
           <h2 className={styles.aboutTitle}>Cloud architecture, DevOps practices,  and Kubernetes.</h2>
         </section>
 
         <Achievements />
         <Articles />
-      </main>  
+      </main>
     </div>
   );
 }
