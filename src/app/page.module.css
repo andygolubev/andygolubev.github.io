@@ -193,8 +193,13 @@
   .heroTitle {
     font-size: 30px;
 
+    .heroTitleName {
+      width: 100%;
+    }
+
     .heroTitleDescription {
       font-size: 40px;
+      border-radius: 0;
     }
   }
 }

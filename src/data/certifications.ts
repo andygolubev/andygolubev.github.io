@@ -2,6 +2,13 @@ import { Certification } from "@/types/certifications";
 
 export const certifications: Certification[] = [
     {
+        id: "Professional Cloud DevOps Engineer",
+        name: "Professional Cloud DevOps Engineer",
+        logo: "/images/certifications/Professional-Cloud-DevOps-Engineer.png",
+        logoBw: "/images/certifications/bw-Professional-Cloud-DevOps-Engineer.png",
+        link: "https://www.credly.com/badges/c87f326e-db8a-4607-8dda-ab61dcdda1c2"
+    },
+    {
         id: "AWS Certified Cloud DevOps Professional",
         name: "AWS Certified Cloud DevOps Professional",
         logo: "/images/certifications/AWS-Certified-Cloud-DevOps-Professional.png",
@@ -14,6 +21,13 @@ export const certifications: Certification[] = [
         logo: "/images/certifications/Certified-Kubernetes-Administrator-(CKA).png",
         logoBw: "/images/certifications/bw-Certified-Kubernetes-Administrator-(CKA).png",
         link: "https://www.credly.com/badges/e7fee247-c5b6-4c1b-a294-0771f0220cef"
+    },   
+    {
+        id: "Certified Kubernetes Application Developer",
+        name: "Certified Kubernetes Application Developer (CKAD)",
+        logo: "/images/certifications/Certified-Kubernetes-Application-Developer-(CKAD).png",
+        logoBw: "/images/certifications/bw-Certified-Kubernetes-Application-Developer-(CKAD).png",
+        link: "https://www.credly.com/badges/6e668058-8e84-48e1-a71c-9cbd97a02ded"
     },
     {
         id: "Google Cloud Certified Cloud Engineer",
@@ -21,13 +35,6 @@ export const certifications: Certification[] = [
         logo: "/images/certifications/Google-Cloud-Certified-Cloud-Engineer.png",
         logoBw: "/images/certifications/bw-Google-Cloud-Certified-Cloud-Engineer.png",
         link: "https://www.credly.com/badges/22bcaa4c-5e7c-4d38-959a-b39a4ef0a502"
-    },
-    {
-        id: "Certified Kubernetes Application Developer",
-        name: "Certified Kubernetes Application Developer (CKAD)",
-        logo: "/images/certifications/Certified-Kubernetes-Application-Developer-(CKAD).png",
-        logoBw: "/images/certifications/bw-Certified-Kubernetes-Application-Developer-(CKAD).png",
-        link: "https://www.credly.com/badges/6e668058-8e84-48e1-a71c-9cbd97a02ded"
     },
     {
         id: "AWS Certified SysOps Administrator Associate",
@@ -49,7 +56,7 @@ export const certifications: Certification[] = [
         logo: "/images/certifications/AWS-Certified-Solutions-Architect-Associate.png",
         logoBw: "/images/certifications/bw-AWS-Certified-Solutions-Architect-Associate.png",
         link: "https://www.credly.com/badges/c217a8a3-2f60-4e53-9074-307b254ea3d3"
-    },  
+    },
     {
         id: "HashiCorp Certified Terraform Associate",
         name: "HashiCorp Certified Terraform — Associate",
