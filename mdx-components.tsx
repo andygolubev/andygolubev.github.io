@@ -10,12 +10,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         // Allows customizing built-in components, e.g. to add styling.
         h1: ({ children }) => <h1 style={{ fontSize: '2rem' }}>{children}</h1>,
         img: (props) => {
-            const { src, alt, width, height, ...rest } = props;
+            const { src, alt, ...rest } = props;
             const imgSrc = typeof src === 'string' ? src : '';
 
             // Return responsive image with proper styling
             return (
-                <div style={{ margin: '2rem 0' }}>
+                <span style={{ display: 'block', margin: '2rem 0' }}>
                     <img
                         src={imgSrc}
                         alt={alt || ''}
@@ -26,7 +26,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
                         }}
                         {...rest}
                     />
-                </div>
+                </span>
             );
         },
         ...components,

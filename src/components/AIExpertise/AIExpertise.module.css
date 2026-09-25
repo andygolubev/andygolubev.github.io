@@ -1,6 +1,6 @@
 .aiExpertiseSection {
     border-radius: var(--default-radius);
-    background-image: url("/images/sky/orgsky.jpg");
+    background-image: var(--sky-aisky);
     margin-bottom: 400px;
 }
 
@@ -22,7 +22,8 @@
         left: 0px;
         width: 40px;
         height: 40px;
-        background: url("/images/smooth-corners/left-top.svg") no-repeat center center;
+        background-color: var(--background);
+        mask: url("/images/smooth-corners/left-top.svg") center / 100% 100% no-repeat;
     }
 
     &::after {
@@ -32,7 +33,8 @@
         top: 0px;
         width: 40px;
         height: 40px;
-        background: url("/images/smooth-corners/left-top.svg") no-repeat center center;
+        background-color: var(--background);
+        mask: url("/images/smooth-corners/left-top.svg") center / 100% 100% no-repeat;
     }
 }
 
@@ -100,3 +102,4 @@
         font-size: 30px;
     }
 }
+.aiExpertiseCard p { color: var(--text-muted); }

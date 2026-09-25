@@ -6,8 +6,8 @@ export const organisations: Organisation[] = [
         name: "Rhino",
         bussinessField: "Federated ML",
         country: "USA/Israel",
-        logo: "/images/organisations/color/rhino.svg",
-        logoBw: "/images/organisations/rhino.svg",
+        logo: "/images/theme-day/organisations/color/rhino.svg",
+        logoBw: "/images/theme-day/organisations/rhino.svg",
         link: "https://www.rhinofcp.com/"
     },
     {
@@ -15,8 +15,8 @@ export const organisations: Organisation[] = [
         name: "OpsGuru",
         bussinessField: "Cloud consulting",
         country: "Canada/Israel",
-        logo: "/images/organisations/color/opsguru.svg",
-        logoBw: "/images/organisations/opsguru.svg",
+        logo: "/images/theme-day/organisations/color/opsguru.svg",
+        logoBw: "/images/theme-day/organisations/opsguru.svg",
         link: "https://www.opsguru.io"
     },
     {
@@ -24,8 +24,8 @@ export const organisations: Organisation[] = [
         name: "Raiffeisen Bank International",
         bussinessField: "Finance",
         country: "Austria",
-        logo: "/images/organisations/color/raif.svg",
-        logoBw: "/images/organisations/raif.svg",
+        logo: "/images/theme-day/organisations/color/raif.svg",
+        logoBw: "/images/theme-day/organisations/raif.svg",
         link: "https://www.rbinternational.com"
     },
     {
@@ -33,8 +33,8 @@ export const organisations: Organisation[] = [
         name: "Bank Discount",
         bussinessField: "Finance",
         country: "Israel",
-        logo: "/images/organisations/color/discont.svg",
-        logoBw: "/images/organisations/discont.svg",
+        logo: "/images/theme-day/organisations/color/discont.svg",
+        logoBw: "/images/theme-day/organisations/discont.svg",
         link: "https://www.discountbank.co.il"
     },
     {
@@ -42,8 +42,8 @@ export const organisations: Organisation[] = [
         name: "Israel Antiquities Authority",
         bussinessField: "Public Sector",
         country: "Israel",
-        logo: "/images/organisations/color/aticot.svg",
-        logoBw: "/images/organisations/aticot.svg",
+        logo: "/images/theme-day/organisations/color/aticot.svg",
+        logoBw: "/images/theme-day/organisations/aticot.svg",
         link: "https://www.antiquities.org.il"
     },
     {
@@ -51,8 +51,8 @@ export const organisations: Organisation[] = [
         name: "Global Remit",
         bussinessField: "FinTech",
         country: "Israel",
-        logo: "/images/organisations/color/globalremit.svg",
-        logoBw: "/images/organisations/globalremit.svg",
+        logo: "/images/theme-day/organisations/color/globalremit.svg",
+        logoBw: "/images/theme-day/organisations/globalremit.svg",
         link: "https://global-remit.co.il/"
     },
     // {
@@ -60,8 +60,8 @@ export const organisations: Organisation[] = [
     //     name: "STADIK",
     //     bussinessField: "Digital transformation",
     //     country: "UAE",
-    //     logo: "/images/organisations/color/stadik.svg",
-    //     logoBw: "/images/organisations/stadik.svg",
+    //     logo: "/images/theme-day/organisations/color/stadik.svg",
+    //     logoBw: "/images/theme-day/organisations/stadik.svg",
     //     link: "https://www.stadik-group.com/"
     // },
     {
@@ -69,8 +69,8 @@ export const organisations: Organisation[] = [
         name: "Ameriabank",
         bussinessField: "Finance",
         country: "Armenia",
-        logo: "/images/organisations/color/ameria.svg",
-        logoBw: "/images/organisations/ameria.svg",
+        logo: "/images/theme-day/organisations/color/ameria.svg",
+        logoBw: "/images/theme-day/organisations/ameria.svg",
         link: "https://www.ameriabank.am"
     },
     {
@@ -78,8 +78,8 @@ export const organisations: Organisation[] = [
         name: "Sber Bank",
         bussinessField: "Finance",
         country: "Russia",
-        logo: "/images/organisations/color/sber.svg",
-        logoBw: "/images/organisations/sber.svg",
+        logo: "/images/theme-day/organisations/color/sber.svg",
+        logoBw: "/images/theme-day/organisations/sber.svg",
         link: "https://www.sberbank.com"
     },
     {
@@ -87,8 +87,8 @@ export const organisations: Organisation[] = [
         name: "INREAM",
         bussinessField: "EdTech",
         country: "Israel",
-        logo: "/images/organisations/color/inream.svg",
-        logoBw: "/images/organisations/inream.svg",
+        logo: "/images/theme-day/organisations/color/inream.svg",
+        logoBw: "/images/theme-day/organisations/inream.svg",
         link: "https://www.inream.com"
     }
 ];

@@ -1,0 +1,35 @@
+.switcher {
+    position: absolute;
+    right: max(10px, calc(var(--default-offset) - 10px));
+    bottom: max(10px, calc(var(--default-offset) - 10px));
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--foreground);
+    cursor: pointer;
+}
+
+.switcher:hover { background: var(--control-hover); }
+.switcher:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+.icon {
+    width: 24px;
+    height: 24px;
+    background: currentColor;
+    mask: var(--theme-switch-icon) center / contain no-repeat;
+}
+
+@media (width <= 800px) {
+    .switcher {
+        position: relative;
+        align-self: flex-end;
+        right: auto;
+        bottom: auto;
+        margin: 10px max(10px, calc(var(--default-offset) - 10px));
+    }
+}

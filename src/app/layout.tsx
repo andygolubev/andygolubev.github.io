@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Funnel_Display } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/Theme/ThemeProvider";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import Credits from "@/components/Credits/Credits";
@@ -26,13 +27,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${funnelDisplay.variable}`}>
+    <html lang="en" data-theme="night" suppressHydrationWarning className={`${geistSans.variable} ${funnelDisplay.variable}`}>
 
-      <body >
-        <Header />
-        {children}
-        <Footer />
-        <Credits />
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: `(function(){try{document.documentElement.dataset.theme=localStorage.getItem("andy-theme")==="day"?"day":"night"}catch{}})();` }} />
+      </head>
+      <body>
+        <ThemeProvider>
+          <Header />
+          {children}
+          <Footer />
+          <Credits />
+        </ThemeProvider>
       </body>
     </html>
   );

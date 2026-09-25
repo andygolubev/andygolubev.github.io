@@ -1,7 +1,18 @@
 :root {
   font-size: 16px;
-  --background: #ffffff;
-  --foreground: #48464A;
+  --background: #171A31;
+  --foreground: #ffffff;
+  --text: var(--foreground);
+  --text-secondary: rgb(255 255 255 / 90%);
+  --text-muted: rgb(255 255 255 / 70%);
+  --code-background: #252940;
+  --code-foreground: #f0f3f6;
+  --table-stripe: #1e223a;
+  --border: #444961;
+  --link: #8cbfff;
+  --control-hover: rgb(255 255 255 / 15%);
+  --theme-switch-icon: url("/images/icons/sun.svg");
+  color-scheme: dark;
   --font-primary: var(--font-geist-sans);
   --font-accent: var(--font-funnel-display);
   --default-offset: 40px;
@@ -9,12 +20,7 @@
   --power-line-offset: 268px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #48464A;
-    --foreground: #ededed;
-  }
-}
+
 
 html,
 body {
@@ -45,8 +51,8 @@ a {
 :not(pre) > code {
   padding: 0.12em 0.35em;
   border-radius: 0.3em;
-  background-color: #f6f8fa;
-  color: #24292f;
+  background-color: var(--code-background);
+  color: var(--code-foreground);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: 0.9em;
   line-height: inherit;
@@ -62,16 +68,7 @@ h1, h2 {
 .accent-font {
   font-family: var(--font-accent), Arial, Helvetica, sans-serif !important;
 }
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
 
-  :not(pre) > code {
-    background-color: #34373d;
-    color: #f0f3f6;
-  }
-}
 
 @media (width <= 1520px) {
   :root {
@@ -86,3 +83,45 @@ h1, h2 {
     font-size: 14px;
   }
 }
+
+:root {
+  --sky-hero: url("/images/theme-night/sky/hero.jpg");
+  --sky-aisky: url("/images/theme-night/sky/aisky.jpg");
+  --sky-certsky: url("/images/theme-night/sky/certsky.jpg");
+  --sky-orgsky: url("/images/theme-night/sky/orgsky.jpg");
+  --sky-art-v1: url("/images/theme-night/sky/art-v1.jpg");
+  --sky-art-v2: url("/images/theme-night/sky/art-v2.jpg");
+  --sky-art-v3: url("/images/theme-night/sky/art-v3.jpg");
+  --sky-art-v4: url("/images/theme-night/sky/art-v4.jpg");
+  --sky-art-v5: url("/images/theme-night/sky/art-v5.jpg");
+  --sky-art-v6: url("/images/theme-night/sky/art-v6.jpg");
+}
+
+:root[data-theme="day"] {
+  --background: #ffffff;
+  --foreground: #48464A;
+  --text-secondary: #48464A;
+  --text-muted: #48464A;
+  --code-background: #f6f8fa;
+  --code-foreground: #24292f;
+  --table-stripe: #fafbfc;
+  --border: #d8dee4;
+  --link: #0070f3;
+  --control-hover: rgb(72 70 74 / 12%);
+  --theme-switch-icon: url("/images/icons/moon.svg");
+  color-scheme: light;
+  --sky-hero: url("/images/theme-day/sky/hero.jpg");
+  --sky-aisky: url("/images/theme-day/sky/aisky.jpg");
+  --sky-certsky: url("/images/theme-day/sky/certsky.jpg");
+  --sky-orgsky: url("/images/theme-day/sky/orgsky.jpg");
+  --sky-art-v1: url("/images/theme-day/sky/art-v1.jpg");
+  --sky-art-v2: url("/images/theme-day/sky/art-v2.jpg");
+  --sky-art-v3: url("/images/theme-day/sky/art-v3.jpg");
+  --sky-art-v4: url("/images/theme-day/sky/art-v4.jpg");
+  --sky-art-v5: url("/images/theme-day/sky/art-v5.jpg");
+  --sky-art-v6: url("/images/theme-day/sky/art-v6.jpg");
+}
+
+/* Hide server-rendered night artwork until React adopts a saved day preference. */
+:root[data-theme="day"] [data-asset-theme="night"],
+:root[data-theme="night"] [data-asset-theme="day"] { visibility: hidden; }

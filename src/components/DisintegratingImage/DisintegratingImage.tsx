@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
+import { useTheme, themeAsset } from '@/components/Theme/ThemeProvider';
 import styles from './DisintegratingImage.module.css';
 
 interface DisintegratingImageProps {
@@ -8,7 +9,13 @@ interface DisintegratingImageProps {
     className?: string;
 }
 
-export default function DisintegratingImage({ src, alt, className }: DisintegratingImageProps) {
+export default function DisintegratingImage(props: DisintegratingImageProps) {
+    const { theme } = useTheme();
+    const src = themeAsset(props.src, theme);
+    return <AnimatedImage key={src} {...props} src={src} theme={theme} />;
+}
+
+function AnimatedImage({ src, alt, className, theme }: DisintegratingImageProps & { theme: string }) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const imageRef = useRef<HTMLImageElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -326,6 +333,7 @@ export default function DisintegratingImage({ src, alt, className }: Disintegrat
 
     return (
         <div
+            data-asset-theme={theme}
             ref={containerRef}
             className={className ? `${styles.container} ${className}` : styles.container}
             onMouseLeave={handleMouseLeave}

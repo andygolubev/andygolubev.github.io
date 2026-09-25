@@ -45,3 +45,4 @@
         height: 100px;
     }
 }
+.certificationItem p { color: var(--text-secondary); }

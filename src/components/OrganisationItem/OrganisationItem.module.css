@@ -56,3 +56,4 @@
         height: 40px;
     }
 }
+.organisationItem p { color: var(--text-secondary); }

@@ -84,3 +84,7 @@
         }
     }
 }
+.socialIcon { display: block; width: 24px; height: 24px; background: currentColor; }
+.github { mask: url('/images/icons/github.svg') center / contain no-repeat; }
+.linkedin { mask: url('/images/icons/linkedin.svg') center / contain no-repeat; }
+.email { mask: url('/images/icons/email.svg') center / contain no-repeat; }

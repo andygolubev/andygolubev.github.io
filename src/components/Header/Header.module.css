@@ -25,7 +25,8 @@
     left: 0;
     width: 40px;
     height: 40px;
-    background: url("/images/smooth-corners/left-top.svg") no-repeat center center;
+    background-color: var(--background);
+    mask: url("/images/smooth-corners/left-top.svg") center / 100% 100% no-repeat;
 }
 
 .nav {
@@ -46,7 +47,8 @@
     left: -40px;
     width: 40px;
     height: 40px;
-    background: url("/images/smooth-corners/right-top.svg") no-repeat center center;
+    background-color: var(--background);
+    mask: url("/images/smooth-corners/right-top.svg") center / 100% 100% no-repeat;
 }
 
 .nav::after {
@@ -56,7 +58,8 @@
     bottom: -40px;
     width: 40px;
     height: 40px;
-    background: url("/images/smooth-corners/right-top.svg") no-repeat center center;
+    background-color: var(--background);
+    mask: url("/images/smooth-corners/right-top.svg") center / 100% 100% no-repeat;
 }
 
 @media (width <=580px) {
@@ -73,6 +76,7 @@
         bottom: -40px;
         width: 40px;
         height: 40px;
-        background: url("/images/smooth-corners/left-top.svg") no-repeat center center;
+        background-color: var(--background);
+        mask: url("/images/smooth-corners/left-top.svg") center / 100% 100% no-repeat;
     }
 }
